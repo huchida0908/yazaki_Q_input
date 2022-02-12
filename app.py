@@ -13,7 +13,7 @@ import datetime
 
 # write data to sqlite
 
-db_path = r"G:\マイドライブ\001.project\43.yazaki_dx\20_検討資料\25.長崎DX\8.webapp\yazaki_Q_input\quality_db.sqlite3"
+db_path = r"./quality_db.sqlite3"
 engine = sqlalchemy.create_engine(f'sqlite:///{db_path}', echo=True)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
