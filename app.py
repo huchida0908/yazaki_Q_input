@@ -81,12 +81,12 @@ def main():
             
         )
 
+        df = pd.read_sql_query(sql=sql_statement, con=engine)
+
+        st.write(df)
+
     elif choice =="不具合入力":
         data = st.file_uploader("upload file")
-
-    df = pd.read_sql_query(sql=sql_statement, con=engine)
-
-    st.write(df)
 
 
 if __name__ == '__main__':
