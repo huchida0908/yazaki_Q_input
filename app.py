@@ -87,7 +87,13 @@ def main():
 
     elif choice =="不具合入力":
         data = st.file_uploader("upload file")
+        person_list = ["矢澤", "中村", "内田","松村"]
+        writer_person = st.selectbox("記入者", person_list)
 
+        fuguai_group = ["前工程", "自工程"]
+        fuguai_group = st.multiselect("不良分類", fuguai_group)
+
+        submit = st.button("提出")
 
 if __name__ == '__main__':
     main()
