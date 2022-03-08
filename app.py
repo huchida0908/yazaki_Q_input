@@ -37,7 +37,7 @@ def main():
 
     Base.metadata.create_all(bind=engine)
 
-    menu = ["実績登録","データチェック"]
+    menu = ["実績登録","データチェック","不具合入力"]
     choice = st.sidebar.selectbox("メニュー",menu)
 
     
@@ -80,6 +80,10 @@ def main():
             ])
             
         )
+
+    elif choice =="不具合入力":
+        data = st.fileuploader("upload file")
+
     df = pd.read_sql_query(sql=sql_statement, con=engine)
 
     st.write(df)
