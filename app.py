@@ -82,7 +82,7 @@ def main():
         )
 
     elif choice =="不具合入力":
-        data = st.fileuploader("upload file")
+        data = st.file_uploader("upload file")
 
     df = pd.read_sql_query(sql=sql_statement, con=engine)
 
