@@ -93,6 +93,9 @@ def main():
         fuguai_group = ["前工程", "自工程"]
         fuguai_group = st.multiselect("不良分類", fuguai_group)
 
+        st.write("不具合内容を入力")
+        fuguai_detail = st.text_area("不具合内容を記載してください")
+
         submit = st.button("提出")
 
 if __name__ == '__main__':
