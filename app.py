@@ -26,13 +26,11 @@ def main():
     # engine = sqlalchemy.create_engine(f'sqlite:///{db_path}', echo=True)
     # engine = sqlalchemy.create_engine('mysql://"mclaren_type_r":"MI6-fallout!"@"113.41.135.102"/3307')
 
-    engine = sqlalchemy.create_engine("mariadb+mariadbconnector://mclaren_type_r:MI6-fallout!@113.41.135.102:3307/yazaki")
+    engine = sqlalchemy.create_engine("mysql+mysqldb://mclaren_type_r:MI6-fallout!@113.41.135.102:3307/yazaki")
 
     Base = declarative_base()
     Session = sessionmaker(bind=engine)
     session = Session()
-
-
 
     class Quality(Base):
 
