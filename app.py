@@ -44,9 +44,17 @@ def main():
 
         __tablename__ = 't_quality'
 
+    class Hinban(Base):
+
+        id = Column(Integer, primary_key=True, autoincrement=True)
+        hinban = Column(String(length = 255))
+        hinban_name = Column(String(length = 255))
+
+        __tablename__ = 'm_hinban'
+
     Base.metadata.create_all(bind=engine)
 
-    menu = ["実績登録","データチェック","不具合入力"]
+    menu = ["実績登録","データチェック","不具合入力","品番マスター登録"]
     choice = st.sidebar.selectbox("メニュー",menu)
 
     
@@ -143,6 +151,22 @@ def main():
             
             Key = f'image_data_quality/{Filename}'
             client.upload_file(img_path, Bucket, Key)
+
+    if choice == "品番マスター登録":
+
+
+
+        if st.button('登録'):
+
+            code = st.text_input('コードをよませてください')
+            st.write('品番 ：', code)
+            hinban_name = st.text_input('品番名を入力してください')
+
+            Data = Hinban(hinban=code,hinban_name=hinban_name)
+            session.add(Data)
+            session.commit()
+
+            st.write(f'{code}:{hinban_name}をマスター登録しました。')
 
 if __name__ == '__main__':
     main()
