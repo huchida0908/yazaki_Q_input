@@ -3,9 +3,7 @@ from random import choice
 from re import sub
 import string
 from unicodedata import name
-
 from PIL import Image
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -20,11 +18,14 @@ import datetime
 import os
 from dotenv import load_dotenv
 import boto3
+import mysql.connector
 
 def main():
 
-    db_path = r"./quality_db.sqlite3"
-    engine = sqlalchemy.create_engine(f'sqlite:///{db_path}', echo=True)
+    # db_path = r"./quality_db.sqlite3"
+    # engine = sqlalchemy.create_engine(f'sqlite:///{db_path}', echo=True)
+    engine = sqlalchemy.create_engine("mariadb///?User=mclaren_type_r&Password=MI6-fallout!&Database=yazaki&Server=113.41.135.102&Port=3307")
+
     Base = declarative_base()
     Session = sessionmaker(bind=engine)
     session = Session()
@@ -131,8 +132,6 @@ def main():
 
             load_dotenv()
             client = boto3.client('s3',
-                # aws_access_key_id='AKIA4ZUVPYBKRRB6JBHS',
-                # aws_secret_access_key='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',
                 aws_access_key_id=os.environ.get("aws_access_key_id"),
                 aws_secret_access_key=os.environ.get("aws_secret_access_key"),
 
