@@ -131,8 +131,11 @@ def main():
 
             load_dotenv()
             client = boto3.client('s3',
-                aws_access_key_id='AKIA4ZUVPYBKRRB6JBHS',
-                aws_secret_access_key='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',
+                # aws_access_key_id='AKIA4ZUVPYBKRRB6JBHS',
+                # aws_secret_access_key='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',
+                aws_access_key_id=os.environ.get("aws_access_key_id"),
+                aws_secret_access_key=os.environ.get("aws_secret_access_key"),
+
                 region_name='ap-northeast-1'
             )
             Bucket = 'yazaki-data'
