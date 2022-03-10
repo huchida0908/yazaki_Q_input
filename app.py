@@ -121,6 +121,10 @@ def main():
             IMG_PATH = 'imgs'
             img_path = os.path.join(IMG_PATH, file.name)
 
+            # 画像を保存する
+            with open(img_path, 'wb') as f:
+                f.write(file.read())
+
             # 保存した画像を表示
             img = Image.open(img_path)
             st.image(img)
