@@ -134,7 +134,7 @@ def main():
             Bucket = 'yazaki-data'
             
             Key = f'image_data_quality/{Filename}'
-            client.upload_file(Filename, Bucket, Key)
+            client.upload_file(img_path, Bucket, Key)
 
 if __name__ == '__main__':
     main()
