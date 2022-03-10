@@ -72,9 +72,9 @@ def main():
 
         Session = sessionmaker(bind=engine)
         session = Session()
-
+        st.write(session.query(Hinban).filter(Hinban.hinban==code).one())
         code = st.text_input('看板バーコード')
-        st.write(f'品番 ： {session.query(Hinban).filter(Hinban.hinban==code).one()}')
+        # st.write(f'品番 ： {session.query(Hinban).filter(Hinban.hinban==code).one()}')
 
         # 品番
 
