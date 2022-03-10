@@ -24,7 +24,7 @@ def main():
 
     # db_path = r"./quality_db.sqlite3"
     # engine = sqlalchemy.create_engine(f'sqlite:///{db_path}', echo=True)
-    engine = sqlalchemy.create_engine("mariadb///?User=user&Password=password&Database=database&Server=host&Port=port")
+    engine = sqlalchemy.create_engine('mysql://mclaren_type_r:MI6-fallout!@113.41.135.102/3307')
 
     Base = declarative_base()
     Session = sessionmaker(bind=engine)
