@@ -4,6 +4,8 @@ from re import sub
 import string
 from unicodedata import name
 
+from PIL import Image
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -116,6 +118,13 @@ def main():
 
         if submit:
             
+            IMG_PATH = 'imgs'
+            img_path = os.path.join(IMG_PATH, file.name)
+
+            # 保存した画像を表示
+            img = Image.open(img_path)
+            st.image(img)
+
             load_dotenv()
             client = boto3.client('s3')
             Bucket = 'yazaki-data'
