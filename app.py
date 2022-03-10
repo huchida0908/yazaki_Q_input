@@ -130,7 +130,11 @@ def main():
             st.image(img)
 
             load_dotenv()
-            client = boto3.client('s3')
+            client = boto3.client('s3',
+                aws_access_key_id='AKIA4ZUVPYBKRRB6JBHS',
+                aws_secret_access_key='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',
+                region_name='ap-northeast-1'
+            )
             Bucket = 'yazaki-data'
             
             Key = f'image_data_quality/{Filename}'
