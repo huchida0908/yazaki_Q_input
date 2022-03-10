@@ -1,6 +1,8 @@
 from operator import length_hint
 from random import choice
+from re import sub
 import string
+from unicodedata import name
 
 import streamlit as st
 import pandas as pd
@@ -13,7 +15,9 @@ from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import select
 import datetime
-
+import os
+from dotenv import load_dotenv
+import boto3
 
 def main():
 
@@ -22,6 +26,8 @@ def main():
     Base = declarative_base()
     Session = sessionmaker(bind=engine)
     session = Session()
+
+
 
     class Quality(Base):
 
@@ -86,17 +92,36 @@ def main():
         st.write(df)
 
     elif choice =="不具合入力":
-        data = st.file_uploader("upload file")
+
         person_list = ["矢澤", "中村", "内田","松村"]
+        fuguai_group = ["前工程", "自工程"]
+
+
+        file = st.file_uploader("upload file")
+
+        if file:
+            st.write(file)
+            st.markdown(f"{file.name}をアップロードしました")
+
+            Filename = file.name
+
         writer_person = st.selectbox("記入者", person_list)
 
-        fuguai_group = ["前工程", "自工程"]
         fuguai_group = st.multiselect("不良分類", fuguai_group)
 
         st.write("不具合内容を入力")
         fuguai_detail = st.text_area("不具合内容を記載してください")
 
         submit = st.button("提出")
+
+        if submit:
+            
+            load_dotenv()
+            client = boto3.client('s3')
+            Bucket = 'yazaki-data'
+            
+            Key = f'image_data_quality/{Filename}'
+            client.upload_file(Filename, Bucket, Key)
 
 if __name__ == '__main__':
     main()
