@@ -59,6 +59,7 @@ def main():
 
     
     if choice == "実績登録":
+
         st.title('工程能力管理')
 
         kanri = st.radio(
@@ -69,8 +70,11 @@ def main():
             number = st.number_input('加工済みロット数', step=1)
             st.write('加工数 ：', number*25 )
 
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
         code = st.text_input('看板バーコード')
-        st.write('品番 ：', code)
+        st.write(f'品番 ： {session.query(Hinban).filter(Hinban.hinban==code).one()}')
 
         # 品番
 
@@ -83,6 +87,8 @@ def main():
             session.commit()
 
             st.write(f'{code}の{kanri}実績値を登録しました。')
+
+        session.close()
         
     elif choice == "データチェック":
         st.title('データチェック')
@@ -96,7 +102,6 @@ def main():
                 Quality.created_at,
                 Quality.result
             ])
-            
         )
 
         df = pd.read_sql_query(sql=sql_statement, con=engine)
@@ -107,7 +112,6 @@ def main():
 
         person_list = ["矢澤", "中村", "内田","松村"]
         fuguai_group = ["前工程", "自工程"]
-
 
         file = st.file_uploader("upload file")
 
@@ -123,7 +127,6 @@ def main():
 
         st.write("不具合内容を入力")
         fuguai_detail = st.text_area("不具合内容を記載してください")
-
 
         submit = st.button("提出")
 
