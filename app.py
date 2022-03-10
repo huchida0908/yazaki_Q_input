@@ -57,8 +57,9 @@ def main():
             "初物管理",
             ('初物', '終物', 'その他'))
 
-        number = st.number_input('加工済みロット数', step=1)
-        st.write('加工数 ：', number*25 )
+        if kanri == "終物":
+            number = st.number_input('加工済みロット数', step=1)
+            st.write('加工数 ：', number*25 )
 
         code = st.text_input('看板バーコード')
         st.write('品番 ：', code)
