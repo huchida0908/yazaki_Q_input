@@ -154,13 +154,11 @@ def main():
 
     if choice == "品番マスター登録":
 
-
+        code = st.text_input('コードをよませてください')
+        st.write('品番 ：', code)
+        hinban_name = st.text_input('品番名を入力してください')
 
         if st.button('登録'):
-
-            code = st.text_input('コードをよませてください')
-            st.write('品番 ：', code)
-            hinban_name = st.text_input('品番名を入力してください')
 
             Data = Hinban(hinban=code,hinban_name=hinban_name)
             session.add(Data)
