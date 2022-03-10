@@ -24,7 +24,7 @@ def main():
 
     # db_path = r"./quality_db.sqlite3"
     # engine = sqlalchemy.create_engine(f'sqlite:///{db_path}', echo=True)
-    engine = sqlalchemy.create_engine("mariadb///?User=mclaren_type_r&Password=MI6-fallout!&Database=yazaki&Server=113.41.135.102&Port=3307")
+    engine = sqlalchemy.create_engine("mariadb///?User="mclaren_type_r"&Password="MI6-fallout!"&Database="yazaki"&Server="113.41.135.102"&Port=3307")
 
     Base = declarative_base()
     Session = sessionmaker(bind=engine)
@@ -114,6 +114,7 @@ def main():
 
         st.write("不具合内容を入力")
         fuguai_detail = st.text_area("不具合内容を記載してください")
+
 
         submit = st.button("提出")
 
