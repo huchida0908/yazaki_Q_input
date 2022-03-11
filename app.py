@@ -52,6 +52,18 @@ def main():
 
         __tablename__ = 'm_hinban'
 
+    class TFuguai(Base):
+
+        id = Column(Integer, primary_key=True, autoincrement=True)
+        writer_person = Column(String(length=255))
+        fuguai_group = Column(String(length=255))
+        fuguai_detail = Column(String(length=255))
+        auto_group = Column(String(length=255))
+        created_at = Column(DateTime, default=datetime.datetime.now)
+        updated_at = Column(DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
+
+        __tablename__ = 't_fuguai'
+
     Base.metadata.create_all(bind=engine)
 
     menu = ["実績登録","データチェック","不具合入力","品番マスター登録"]
@@ -72,8 +84,10 @@ def main():
 
         Session = sessionmaker(bind=engine)
         session = Session()
-        st.write(session.query(Hinban).filter(Hinban.hinban==code).one())
         code = st.text_input('看板バーコード')
+        if code:
+            st.write(session.query(Hinban.hinban_name).filter(Hinban.hinban==code).one())
+
         # st.write(f'品番 ： {session.query(Hinban).filter(Hinban.hinban==code).one()}')
 
         # 品番
@@ -123,7 +137,7 @@ def main():
 
         writer_person = st.selectbox("記入者", person_list)
 
-        fuguai_group = st.multiselect("不良分類", fuguai_group)
+        fuguai_group = st.selectbox("不良分類", fuguai_group)
 
         st.write("不具合内容を入力")
         fuguai_detail = st.text_area("不具合内容を記載してください")
@@ -131,6 +145,9 @@ def main():
         submit = st.button("提出")
 
         if submit:
+            Data = TFuguai(writer_person=writer_person,fuguai_group=fuguai_group,fuguai_detail=fuguai_detail)
+            session.add(Data)
+            session.commit()
             
             IMG_PATH = 'imgs'
             img_path = os.path.join(IMG_PATH, file.name)
@@ -154,6 +171,9 @@ def main():
             
             Key = f'image_data_quality/{Filename}'
             client.upload_file(img_path, Bucket, Key)
+
+            st.write('不具合登録完了しました。')
+
 
     if choice == "品番マスター登録":
 
