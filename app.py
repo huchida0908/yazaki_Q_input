@@ -38,7 +38,7 @@ def main():
         kanri = Column(String(length=255))
         created_at = Column(DateTime, default=datetime.datetime.now)
         updated_at = Column(DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
-        kako_no = Column(Integer)
+        kako_no = Column(Integer, default=0)
         hinban = Column(String(length = 255))
         result = Column(Float)
 
@@ -77,6 +77,7 @@ def main():
         kanri = st.radio(
             "初物管理",
             ('初物', '終物', 'その他'))
+        number = 0
 
         if kanri == "終物":
             number = st.number_input('加工済みロット数', step=1)
