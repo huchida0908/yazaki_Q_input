@@ -163,8 +163,8 @@ def main():
 
             load_dotenv()
             client = boto3.client('s3',
-                aws_access_key_id=os.environ.get("aws_access_key_id"),
-                aws_secret_access_key=os.environ.get("aws_secret_access_key"),
+                aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+                aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 
                 region_name='ap-northeast-1'
             )
